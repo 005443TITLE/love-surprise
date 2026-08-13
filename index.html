@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 1 Month Anniversary 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --env-bg: #eeb5c3;
+            --env-flap: #f1aabf;
+            --env-pocket: #e88fa7;
+            --letter-bg: #fffbfb;
+            --text-color: #5a3d46;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #ffccd5 0%, #ff9a9e 100%);
+            font-family: 'Kanit', sans-serif;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        /* Floating hearts background */
+        .hearts-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            animation: floatUp 8s infinite ease-in;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.8) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* --- Login Screen (PIN Style) --- */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff0f3;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease;
+        }
+
+        .login-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .login-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .login-card {
+            background: #f4728f;
+            padding: 40px 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(244, 114, 143, 0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 360px;
+        }
+
+        .login-card h2 {
+            color: white;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .login-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .pin-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .pin-box {
+            width: 32px;
+            height: 45px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 24px;
+            font-family: 'Kanit', sans-serif;
+            text-align: center;
+            color: #f4728f;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            /* Disable native arrows for number input */
+            -moz-appearance: textfield;
+        }
+
+        .pin-box::-webkit-outer-spin-button,
+        .pin-box::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .pin-box:focus {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .login-error {
+            color: #d84365;
+            font-size: 14px;
+            height: 20px;
+            margin-top: 15px;
+        }
+
+        #btn-login {
+            background: #f4728f;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-size: 18px;
+            font-family: 'Kanit', sans-serif;
+            border-radius: 25px;
+            margin-top: 15px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(244, 114, 143, 0.4);
+            transition: transform 0.1s;
+        }
+
+        #btn-login:active {
+            transform: scale(0.95);
+        }
+
+        /* --- Envelope Styles --- */
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 5;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+            backdrop-filter: blur(2px);
+        }
+
+        .backdrop.show {
+            opacity: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background-color: var(--env-bg);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease;
+            cursor: pointer;
+        }
+
+        .envelope-wrapper:hover {
+            transform: translateY(-5px);
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-top: 130px solid var(--env-flap);
+            border-right: 160px solid transparent;
+            border-left: 160px solid transparent;
+            transform-origin: top;
+            transition: transform 0.6s ease, z-index 0.1s;
+            z-index: 5;
+        }
+
+        .pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-bottom: 120px solid var(--env-pocket);
+            border-right: 160px solid var(--env-pocket);
+            border-left: 160px solid var(--env-pocket);
+            border-top: 100px solid transparent;
+            border-radius: 0 0 10px 10px;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .heart-seal {
+            position: absolute;
+            top: 130px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 45px;
+            z-index: 6;
+            transition: opacity 0.3s, transform 0.3s;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+            color: #ff3366;
+        }
+
+        .envelope-wrapper:hover .heart-seal {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Open state */
+        .envelope-wrapper.open {
+            cursor: default;
+            transform: translateY(50px);
+        }
+
+        .envelope-wrapper.open:hover {
+            transform: translateY(50px);
+        }
+
+        /* Reading state for envelope (lowered) */
+        .envelope-wrapper.reading-mode {
+            transform: translateY(120px) !important;
+        }
+
+        .envelope-wrapper.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .heart-seal {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .letters-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 300px;
+            height: 200px;
+            z-index: 3;
+        }
+
+        .letter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--letter-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
+            border: 1px dashed #f5c6cb;
+            transform: translateY(0);
+            cursor: pointer;
+        }
+
+        .letter::before {
+            content: '❤️';
+            position: absolute;
+            top: 10px;
+            font-size: 16px;
+            color: #ff8fa3;
+        }
+
+        /* Peeking out of envelope */
+        .envelope-wrapper.open .letter.active {
+            transform: translateY(-130px);
+            z-index: 10;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Fully pulled out for reading */
+        .envelope-wrapper.open .letter.reading {
+            transform: translateY(-260px) scale(1.15);
+            z-index: 20;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            border: 1px solid #ffccd5;
+        }
+
+        .letter.dismissed {
+            transform: translateY(-500px) rotate(-15deg);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .letter h3 {
+            margin: 15px 0 10px 0;
+            color: #d84365;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .letter p {
+            margin: 0;
+            font-size: 16px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .click-hint {
+            font-size: 13px;
+            color: #bfa3ab;
+            margin-top: auto;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        .instruction-text {
+            position: absolute;
+            bottom: 50px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.4s;
+            letter-spacing: 1px;
+        }
+
+        .instruction-text.hide {
+            opacity: 0;
+        }
+
+        /* Forgiveness Modal */
+        .forgive-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            z-index: 30;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 85%;
+            max-width: 350px;
+        }
+
+        .forgive-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .forgive-modal h2 {
+            color: #5a3d46;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            min-height: 50px;
+        }
+
+        #btn-yes,
+        #btn-no {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-family: 'Kanit', sans-serif;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+
+        #btn-yes {
+            background: #ff8fa3;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 143, 163, 0.4);
+        }
+
+        #btn-yes:active {
+            transform: scale(0.95);
+        }
+
+        #btn-no {
+            background: #e2e2e2;
+            color: #5a3d46;
+            position: relative;
+            z-index: 40;
+        }
+
+        /* Ending screen */
+        .ending-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+            width: 90%;
+        }
+
+        .ending-message.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ending-message h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            line-height: 1.3;
+        }
+
+        .ending-message p {
+            font-size: 18px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Login Screen (PIN Style) -->
+    <div class="login-screen" id="login-screen">
+        <div class="login-content">
+            <div class="login-card">
+                <h2>กรอกรหัสผ่าน</h2>
+                <p>คำใบ้ : วันที่เราคบกันวันแรก</p>
+                <!-- 8 boxes for DDMMYYYY (e.g., 14072026 or 14072569) -->
+                <div class="pin-inputs" id="pin-inputs">
+                    <input type="tel" maxlength="1" class="pin-box" />
+                    <input type="tel" maxlength="1" class="pin-box" />
+                    <input type="tel" maxlength="1" class="pin-box" />
+                    <input type="tel" maxlength="1" class="pin-box" />
+                    <input type="tel" maxlength="1" class="pin-box" />
+                    <input type="tel" maxlength="1" class="pin-box" />
+                    <input type="tel" maxlength="1" class="pin-box" />
+                    <input type="tel" maxlength="1" class="pin-box" />
+                </div>
+            </div>
+            <div id="login-error" class="login-error"></div>
+            <button id="btn-login">ยืนยัน</button>
+        </div>
+    </div>
+
+    <div class="hearts-bg" id="hearts-bg"></div>
+    <div class="backdrop" id="backdrop"></div>
+
+    <div class="instruction-text" id="instruction">แตะที่ซองจดหมายเพื่อเปิด ❤️</div>
+
+    <div class="container" id="main-container">
+        <div class="envelope-wrapper" id="envelope">
+            <div class="flap"></div>
+            <div class="pocket"></div>
+            <div class="letters-container" id="letters-container">
+                <!-- Letters generated by JS -->
+            </div>
+            <div class="heart-seal">💖</div>
+        </div>
+    </div>
+
+    <!-- Forgiveness Modal -->
+    <div class="forgive-modal" id="forgive-modal">
+        <h2>ที่รักยกโทษให้เค้าได้มั้ยเรื่องเมื่อคืน 🥺</h2>
+        <div class="buttons">
+            <button id="btn-yes">โอเค ยอมก็ได้ 💖</button>
+            <button id="btn-no">ไม่!</button>
+        </div>
+    </div>
+
+    <!-- Final Wishes -->
+    <div class="ending-message" id="ending">
+        <h1>เย้! ขอบคุณนะค้าบ รักที่สุดเลยยยย 💖</h1>
+        <p>Happy 1st Month Anniversary 🎉<br>เค้าจะดูแลตัวให้ดีกว่านี้ จะไม่ทำให้เสียใจอีกแล้ว<br>อยู่ด้วยกันไปนานๆ
+            นะคะคนเก่ง</p>
+    </div>
+
+    <script>
+        // --- PIN Login System ---
+        // Accepting passwords like 14072026 or 14072569 (8 digits)
+        const validPasswords = ['14072026', '14072569', '1472026', '1472569'];
+        const loginScreen = document.getElementById('login-screen');
+        const pinBoxes = document.querySelectorAll('.pin-box');
+        const btnLogin = document.getElementById('btn-login');
+        const loginError = document.getElementById('login-error');
+
+        // Logic for auto-focusing next/prev PIN box
+        pinBoxes.forEach((box, index) => {
+            box.addEventListener('input', () => {
+                // Remove non-numbers
+                box.value = box.value.replace(/[^0-9]/g, '');
+
+                if (box.value !== '') {
+                    if (index < pinBoxes.length - 1) {
+                        pinBoxes[index + 1].focus();
+                    }
+                }
+            });
+
+            box.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && box.value === '') {
+                    if (index > 0) {
+                        pinBoxes[index - 1].focus();
+                    }
+                } else if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+        });
+
+        function checkPassword() {
+            let enteredPin = '';
+            pinBoxes.forEach(box => { enteredPin += box.value; });
+
+            // Allow 7-digit variations if they didn't fill all 8 boxes
+            if (validPasswords.includes(enteredPin)) {
+                loginScreen.classList.add('hidden');
+                setTimeout(() => {
+                    loginScreen.remove();
+                }, 800);
+            } else {
+                loginError.textContent = 'รหัสผิดน้า ลองใส่วันเดือนปีเต็มๆ ดูนะ (เช่น 14072026) 🥺';
+
+                pinBoxes.forEach(box => {
+                    box.style.boxShadow = '0 0 10px #d84365';
+                });
+                setTimeout(() => {
+                    pinBoxes.forEach(box => {
+                        box.style.boxShadow = 'inset 0 2px 5px rgba(0,0,0,0.1)';
+                    });
+                }, 2000);
+            }
+        }
+
+        btnLogin.addEventListener('click', checkPassword);
+
+
+        // --- Envelope System ---
+        const lettersData = [
+            {
+                title: "แผ่นที่ 1",
+                content: "Happy 1 Month Anniversary นะคะคนเก่ง! วันนี้ครบรอบ 1 เดือนที่เราคบกันแล้วนะ เวลาผ่านไปไวมากๆ เลย",
+                hint: "(แตะเพื่อดึงกระดาษออกมาอ่าน)"
+            },
+            {
+                title: "แผ่นที่ 2",
+                content: "ตลอด 1 เดือนที่ผ่านมา เค้ามีความสุขขขมากๆ เลยนะที่มีเธออยู่ข้างๆ ขอบคุณสำหรับทุกๆ อย่างเลยนะ",
+                hint: "(แตะเพื่อดึงกระดาษออกมาอ่าน)"
+            },
+            {
+                title: "แผ่นที่ 3",
+                content: "ขอบคุณที่คอยดูแล เอาใจใส่ และน่ารักกับเค้าเสมอเลย เค้าจะตั้งใจรักเธอให้ดีที่สุดเลยนะ",
+                hint: "(แตะเพื่อดึงกระดาษออกมาอ่าน)"
+            },
+            {
+                title: "แผ่นที่ 4",
+                content: "อยู่ด้วยกันแบบนี้ไปนานๆ เลยนะ เติบโตไปด้วยกันนะ รักที่สุดเลยยยย 💖",
+                hint: "(แตะเพื่อเก็บ)"
+            }
+        ];
+
+        const envelope = document.getElementById('envelope');
+        const lettersContainer = document.getElementById('letters-container');
+        const instruction = document.getElementById('instruction');
+        const ending = document.getElementById('ending');
+        const backdrop = document.getElementById('backdrop');
+        const forgiveModal = document.getElementById('forgive-modal');
+        const btnYes = document.getElementById('btn-yes');
+        const btnNo = document.getElementById('btn-no');
+
+        let isEnvelopeOpen = false;
+        let currentLetterIndex = 0;
+
+        const reversedLetters = [...lettersData].reverse();
+
+        reversedLetters.forEach((data, index) => {
+            const realIndex = lettersData.length - 1 - index;
+            const letterEl = document.createElement('div');
+            letterEl.className = 'letter';
+            letterEl.id = `letter-${realIndex}`;
+
+            letterEl.innerHTML = `
+                <h3>${data.title}</h3>
+                <p>${data.content}</p>
+                <div class="click-hint">${data.hint}</div>
+            `;
+
+            lettersContainer.appendChild(letterEl);
+        });
+
+        envelope.addEventListener('click', (e) => {
+            if (!isEnvelopeOpen) {
+                isEnvelopeOpen = true;
+                envelope.classList.add('open');
+                instruction.classList.add('hide');
+
+                setTimeout(() => {
+                    const firstLetter = document.getElementById('letter-0');
+                    firstLetter.classList.add('active');
+                }, 400);
+            }
+        });
+
+        lettersContainer.addEventListener('click', (e) => {
+            if (!isEnvelopeOpen) return;
+
+            const activeLetter = e.target.closest('.letter.active');
+            const readingLetter = e.target.closest('.letter.reading');
+
+            if (activeLetter) {
+                // Pull out the letter to read
+                e.stopPropagation();
+                activeLetter.classList.remove('active');
+                activeLetter.classList.add('reading');
+                backdrop.classList.add('show');
+                envelope.classList.add('reading-mode');
+
+                // Change hint text for closing
+                const hint = activeLetter.querySelector('.click-hint');
+                if (hint) {
+                    hint.innerText = "(แตะเพื่อเก็บแผ่นนี้)";
+                }
+            }
+            else if (readingLetter) {
+                // Dismiss the letter after reading
+                e.stopPropagation();
+                readingLetter.classList.remove('reading');
+                readingLetter.classList.add('dismissed');
+                backdrop.classList.remove('show');
+                envelope.classList.remove('reading-mode');
+
+                currentLetterIndex++;
+
+                if (currentLetterIndex < lettersData.length) {
+                    const nextLetter = document.getElementById(`letter-${currentLetterIndex}`);
+                    setTimeout(() => {
+                        nextLetter.classList.add('active');
+                    }, 500);
+                } else {
+                    // Finished reading all letters
+                    setTimeout(() => {
+                        // Close the envelope flap
+                        envelope.classList.remove('open');
+
+                        setTimeout(() => {
+                            // Fade out envelope completely
+                            envelope.style.opacity = '0';
+                            envelope.style.pointerEvents = 'none';
+
+                            setTimeout(() => {
+                                // Show forgiveness modal
+                                forgiveModal.classList.add('show');
+                            }, 500);
+                        }, 800); // Wait for flap to close
+                    }, 500); // Wait for last letter to fly away
+                }
+            }
+        });
+
+        // Prank NO button
+        function moveNoButton() {
+            // Move button to body to escape modal bounding box
+            if (btnNo.parentNode !== document.body) {
+                document.body.appendChild(btnNo);
+            }
+
+            btnNo.style.position = 'fixed';
+            btnNo.style.zIndex = '1000';
+
+            const btnWidth = btnNo.offsetWidth || 80;
+            const btnHeight = btnNo.offsetHeight || 40;
+
+            const maxX = window.innerWidth - btnWidth - 20;
+            const maxY = window.innerHeight - btnHeight - 20;
+
+            // Random position inside window boundaries
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        // For phone: only move when actually clicked
+        btnNo.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // YES button clicked
+        btnYes.addEventListener('click', () => {
+            forgiveModal.classList.remove('show');
+            // Hide the No button since it was appended to the body
+            btnNo.style.display = 'none';
+
+            setTimeout(() => {
+                ending.classList.add('show');
+            }, 500);
+        });
+
+        // Background hearts
+        const heartsBg = document.getElementById('hearts-bg');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+
+            const left = Math.random() * 100;
+            const size = Math.random() * 15 + 10;
+            const duration = Math.random() * 5 + 5;
+            const delay = Math.random() * 5;
+
+            heart.style.left = `${left}%`;
+            heart.style.fontSize = `${size}px`;
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.animationDelay = `${delay}s`;
+
+            heartsBg.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        setInterval(createHeart, 800);
+
+        for (let i = 0; i < 10; i++) {
+            createHeart();
+        }
+
+    </script>
+</body>
+
+</html>
