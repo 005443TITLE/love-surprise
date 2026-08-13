@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,16 +49,32 @@
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.2) rotate(360deg); opacity: 0; }
+            0% {
+                transform: translateY(0) scale(0.8) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* --- Login Screen (PIN Style) --- */
         .login-screen {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: #fff0f3;
             z-index: 100;
             display: flex;
@@ -118,12 +135,12 @@
             font-family: 'Kanit', sans-serif;
             text-align: center;
             color: #f4728f;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
             outline: none;
             transition: transform 0.2s, box-shadow 0.2s;
             -moz-appearance: textfield;
         }
-        
+
         .pin-box::-webkit-outer-spin-button,
         .pin-box::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -132,7 +149,7 @@
 
         .pin-box:focus {
             transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             z-index: 10;
         }
 
@@ -164,15 +181,18 @@
         /* --- Envelope Styles --- */
         .backdrop {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
             z-index: 5;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s;
             backdrop-filter: blur(2px);
         }
-        
+
         .backdrop.show {
             opacity: 1;
         }
@@ -188,7 +208,7 @@
             height: 220px;
             background-color: var(--env-bg);
             border-radius: 0 0 10px 10px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease;
             cursor: pointer;
         }
@@ -234,7 +254,7 @@
             font-size: 45px;
             z-index: 6;
             transition: opacity 0.3s, transform 0.3s;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
             color: #ff3366;
         }
 
@@ -251,7 +271,7 @@
         .envelope-wrapper.open:hover {
             transform: translateY(50px);
         }
-        
+
         /* Reading state for envelope (lowered) */
         .envelope-wrapper.reading-mode {
             transform: translateY(120px) !important;
@@ -284,7 +304,7 @@
             height: 100%;
             background: var(--letter-bg);
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 25px 20px;
             box-sizing: border-box;
             display: flex;
@@ -310,14 +330,14 @@
         .envelope-wrapper.open .letter.active {
             transform: translateY(-130px);
             z-index: 10;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
-        
+
         /* Fully pulled out for reading */
         .envelope-wrapper.open .letter.reading {
             transform: translateY(-260px) scale(1.15);
             z-index: 20;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
             cursor: pointer;
             border: 1px solid #ffccd5;
         }
@@ -351,9 +371,17 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
         }
 
         .instruction-text {
@@ -362,7 +390,7 @@
             color: #fff;
             font-size: 18px;
             font-weight: 500;
-            text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
             transition: opacity 0.4s;
             letter-spacing: 1px;
         }
@@ -374,12 +402,13 @@
         /* Forgiveness Modal */
         .forgive-modal {
             position: fixed;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%) scale(0.8);
             background: white;
             padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
             text-align: center;
             z-index: 30;
             opacity: 0;
@@ -410,7 +439,8 @@
             min-height: 50px;
         }
 
-        #btn-yes, #btn-no {
+        #btn-yes,
+        #btn-no {
             padding: 12px 25px;
             font-size: 16px;
             font-family: 'Kanit', sans-serif;
@@ -424,9 +454,9 @@
         #btn-yes {
             background: #ff8fa3;
             color: white;
-            box-shadow: 0 5px 15px rgba(255,143,163,0.4);
+            box-shadow: 0 5px 15px rgba(255, 143, 163, 0.4);
         }
-        
+
         #btn-yes:active {
             transform: scale(0.95);
         }
@@ -461,13 +491,13 @@
         .ending-message h1 {
             font-size: 32px;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
             line-height: 1.3;
         }
 
         .ending-message p {
             font-size: 18px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             line-height: 1.5;
             margin-bottom: 30px;
         }
@@ -482,16 +512,17 @@
             font-weight: 500;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.1s;
         }
-        
+
         #btn-surprise:active {
             transform: scale(0.95);
         }
 
         /* --- Surprise GIF Grid Screens --- */
-        .surprise-screen, .final-confirm-screen {
+        .surprise-screen,
+        .final-confirm-screen {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -505,7 +536,8 @@
             transition: opacity 0.8s ease;
         }
 
-        .surprise-screen.show, .final-confirm-screen.show {
+        .surprise-screen.show,
+        .final-confirm-screen.show {
             opacity: 1;
             pointer-events: auto;
         }
@@ -514,7 +546,7 @@
             color: white;
             margin-bottom: 25px;
             font-size: 24px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         /* Grid layout for square boxes */
@@ -529,7 +561,7 @@
             background: white;
             border-radius: 15px;
             padding: 15px 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
@@ -541,7 +573,7 @@
 
         .surprise-card:active {
             transform: scale(0.95);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .surprise-gif {
@@ -550,7 +582,8 @@
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 10px;
-            pointer-events: none; /* prevent drag */
+            pointer-events: none;
+            /* prevent drag */
         }
 
         .surprise-text {
@@ -566,7 +599,7 @@
             background: white;
             padding: 40px 20px;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             text-align: center;
             width: 85%;
         }
@@ -604,6 +637,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Login Screen (PIN Style) -->
@@ -656,7 +690,8 @@
     <!-- Final Wishes -->
     <div class="ending-message" id="ending">
         <h1>เย้! ขอบคุณนะค้าบ รักที่สุดเลยยยย 💖</h1>
-        <p>Happy 1st Month Anniversary 🎉<br>เค้าจะดูแลตัวให้ดีกว่านี้ จะไม่ทำให้เสียใจอีกแล้ว<br>อยู่ด้วยกันไปนานๆ นะคะคนเก่ง</p>
+        <p>Happy 1st Month Anniversary 🎉<br>เค้าจะดูแลตัวให้ดีกว่านี้ จะไม่ทำให้เสียใจอีกแล้ว<br>อยู่ด้วยกันไปนานๆ
+            นะคะคนเก่ง</p>
         <button id="btn-surprise">แตะเพื่อเปิดเซอร์ไพรส์ 🎁</button>
     </div>
 
@@ -666,19 +701,19 @@
         <div class="surprise-grid">
             <!-- สามารถเปลี่ยนลิงก์ภาพ GIF ตรง src="..." ได้เลยครับ -->
             <div class="surprise-card" data-choice="เครื่องสำอาง">
-                <img src="https://media1.tenor.com/m/b9uT55a9p7YAAAAC/lipstick-makeup.gif" alt="cosmetics" class="surprise-gif">
+                <img src="25e543bf9e35171ef1fdd476468844d7.gif" alt="cosmetics" class="surprise-gif">
                 <span class="surprise-text">เครื่องสำอาง<br>(ไม่เกิน 300 บ.)</span>
             </div>
             <div class="surprise-card" data-choice="ดอกไม้">
-                <img src="https://media1.tenor.com/m/0FMMq-lZ160AAAAC/flower-rose.gif" alt="flowers" class="surprise-gif">
+                <img src="03d2f2fb67e987294c099ac6c2b879bb.jpg" alt="flowers" class="surprise-gif">
                 <span class="surprise-text">ดอกไม้ 💐</span>
             </div>
             <div class="surprise-card" data-choice="ชุดที่อยากได้">
-                <img src="https://media1.tenor.com/m/QhXoDkP9Y3kAAAAC/dress-twirl.gif" alt="dress" class="surprise-gif">
+                <img src="50c7037b50fdb9b7741a6b0c5319c6e3.gif" alt="dress" class="surprise-gif">
                 <span class="surprise-text">ชุดที่อยากได้<br>(ไม่เกิน 300 บ.)</span>
             </div>
             <div class="surprise-card" data-choice="ของที่อยากได้">
-                <img src="https://media1.tenor.com/m/y1cT8X9lTygAAAAC/gift-present.gif" alt="gift" class="surprise-gif">
+                <img src="252d84e3e38eab574a4571c245e765c0.gif" alt="gift" class="surprise-gif">
                 <span class="surprise-text">ของที่อยากได้<br>(ไม่เกิน 300 บ.)</span>
             </div>
         </div>
@@ -693,7 +728,7 @@
 
     <script>
         // --- PIN Login System ---
-        const validPasswords = ['14072026', '14072569', '1472026', '1472569']; 
+        const validPasswords = ['14072026', '14072569', '1472026', '1472569'];
         const loginScreen = document.getElementById('login-screen');
         const pinBoxes = document.querySelectorAll('.pin-box');
         const btnLogin = document.getElementById('btn-login');
@@ -723,11 +758,11 @@
         function checkPassword() {
             let enteredPin = '';
             pinBoxes.forEach(box => { enteredPin += box.value; });
-            
+
             if (validPasswords.includes(enteredPin)) {
                 loginScreen.classList.add('hidden');
                 setTimeout(() => {
-                    loginScreen.remove(); 
+                    loginScreen.remove();
                 }, 800);
             } else {
                 loginError.textContent = 'รหัสผิดน้า ลองใส่วันเดือนปีเต็มๆ ดูนะ (เช่น 14072026) 🥺';
@@ -777,19 +812,19 @@
         let currentLetterIndex = 0;
 
         const reversedLetters = [...lettersData].reverse();
-        
+
         reversedLetters.forEach((data, index) => {
             const realIndex = lettersData.length - 1 - index;
             const letterEl = document.createElement('div');
             letterEl.className = 'letter';
             letterEl.id = `letter-${realIndex}`;
-            
+
             letterEl.innerHTML = `
                 <h3>${data.title}</h3>
                 <p>${data.content}</p>
                 <div class="click-hint">${data.hint}</div>
             `;
-            
+
             lettersContainer.appendChild(letterEl);
         });
 
@@ -798,32 +833,32 @@
                 isEnvelopeOpen = true;
                 envelope.classList.add('open');
                 instruction.classList.add('hide');
-                
+
                 setTimeout(() => {
                     const firstLetter = document.getElementById('letter-0');
                     firstLetter.classList.add('active');
-                }, 400); 
+                }, 400);
             }
         });
 
         lettersContainer.addEventListener('click', (e) => {
             if (!isEnvelopeOpen) return;
-            
+
             const activeLetter = e.target.closest('.letter.active');
             const readingLetter = e.target.closest('.letter.reading');
-            
+
             if (activeLetter) {
                 e.stopPropagation();
                 activeLetter.classList.remove('active');
                 activeLetter.classList.add('reading');
                 backdrop.classList.add('show');
                 envelope.classList.add('reading-mode');
-                
+
                 const hint = activeLetter.querySelector('.click-hint');
                 if (hint) {
                     hint.innerText = "(แตะเพื่อเก็บแผ่นนี้)";
                 }
-            } 
+            }
             else if (readingLetter) {
                 e.stopPropagation();
                 readingLetter.classList.remove('reading');
@@ -837,15 +872,15 @@
                     const nextLetter = document.getElementById(`letter-${currentLetterIndex}`);
                     setTimeout(() => {
                         nextLetter.classList.add('active');
-                    }, 500); 
+                    }, 500);
                 } else {
                     setTimeout(() => {
                         envelope.classList.remove('open');
-                        
+
                         setTimeout(() => {
                             envelope.style.opacity = '0';
                             envelope.style.pointerEvents = 'none';
-                            
+
                             setTimeout(() => {
                                 forgiveModal.classList.add('show');
                             }, 500);
@@ -862,29 +897,29 @@
 
             btnNo.style.position = 'fixed';
             btnNo.style.zIndex = '1000';
-            
+
             const btnWidth = btnNo.offsetWidth || 80;
             const btnHeight = btnNo.offsetHeight || 40;
-            
+
             const maxX = window.innerWidth - btnWidth - 20;
             const maxY = window.innerHeight - btnHeight - 20;
-            
+
             const randomX = Math.max(10, Math.floor(Math.random() * maxX));
             const randomY = Math.max(10, Math.floor(Math.random() * maxY));
-            
+
             btnNo.style.left = randomX + 'px';
             btnNo.style.top = randomY + 'px';
         }
 
-        btnNo.addEventListener('click', (e) => { 
-            e.preventDefault(); 
-            moveNoButton(); 
+        btnNo.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveNoButton();
         });
 
         btnYes.addEventListener('click', () => {
             forgiveModal.classList.remove('show');
-            btnNo.style.display = 'none'; 
-            
+            btnNo.style.display = 'none';
+
             setTimeout(() => {
                 ending.classList.add('show');
             }, 500);
@@ -910,9 +945,9 @@
             card.addEventListener('click', (e) => {
                 const choice = card.getAttribute('data-choice');
                 surpriseScreen.classList.remove('show');
-                
+
                 finalChoiceText.innerHTML = `เย้! เลือก <b>${choice}</b> 🎁`;
-                
+
                 setTimeout(() => {
                     finalConfirmScreen.classList.add('show');
                 }, 500);
@@ -932,30 +967,31 @@
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
-            
+
             const left = Math.random() * 100;
             const size = Math.random() * 15 + 10;
             const duration = Math.random() * 5 + 5;
             const delay = Math.random() * 5;
-            
+
             heart.style.left = `${left}%`;
             heart.style.fontSize = `${size}px`;
             heart.style.animationDuration = `${duration}s`;
             heart.style.animationDelay = `${delay}s`;
-            
+
             heartsBg.appendChild(heart);
-            
+
             setTimeout(() => {
                 heart.remove();
             }, (duration + delay) * 1000);
         }
 
         setInterval(createHeart, 800);
-        
-        for(let i=0; i<10; i++) {
+
+        for (let i = 0; i < 10; i++) {
             createHeart();
         }
 
     </script>
 </body>
+
 </html>
